@@ -1,0 +1,125 @@
+<Application x:Class="Nvm03.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+  <Application.Resources>
+    <ResourceDictionary>
+      <SolidColorBrush x:Key="CanvasBrush" Color="#EFEEE8" />
+      <SolidColorBrush x:Key="SurfaceBrush" Color="#CBD2D9" />
+      <SolidColorBrush x:Key="MutedBrush" Color="#95A1AD" />
+      <SolidColorBrush x:Key="Ink80Brush" Color="#2A2F34" />
+      <SolidColorBrush x:Key="InkBrush" Color="#010004" />
+      <SolidColorBrush x:Key="ActionBrush" Color="#FA6A0B" />
+      <SolidColorBrush x:Key="ErrorBrush" Color="#B81D13" />
+      <SolidColorBrush x:Key="SuccessBrush" Color="#006837" />
+      <SolidColorBrush x:Key="InfoBrush" Color="#0071BB" />
+      <SolidColorBrush x:Key="WarningBrush" Color="#FAB413" />
+      <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+      <DropShadowEffect x:Key="RaisedShadow" ShadowDepth="2" BlurRadius="3" Opacity="0.2" />
+      <DropShadowEffect x:Key="PressedShadow" ShadowDepth="0" BlurRadius="2" Opacity="0.25" />
+
+      <Style x:Key="NorthButton" TargetType="Button">
+        <Setter Property="Width" Value="54" />
+        <Setter Property="Height" Value="54" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Foreground" Value="{StaticResource CanvasBrush}" />
+        <Setter Property="Background" Value="{StaticResource Ink80Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource InkBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="Button">
+              <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" Effect="{StaticResource RaisedShadow}">
+                <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8" />
+              </Border>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Border" Property="Opacity" Value="0.9" /></Trigger>
+                <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource ActionBrush}" /><Setter TargetName="Border" Property="BorderThickness" Value="2" /></Trigger>
+                <Trigger Property="IsPressed" Value="True"><Setter TargetName="Border" Property="Margin" Value="0,1,0,-1" /><Setter TargetName="Border" Property="Effect" Value="{StaticResource PressedShadow}" /></Trigger>
+                <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Border" Property="Background" Value="{StaticResource SurfaceBrush}" /><Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MutedBrush}" /><Setter TargetName="Border" Property="Effect" Value="{x:Null}" /><Setter Property="Foreground" Value="{StaticResource MutedBrush}" /></Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="NorthPrimaryButton" TargetType="Button" BasedOn="{StaticResource NorthButton}">
+        <Setter Property="Background" Value="{StaticResource Ink80Brush}" />
+        <Setter Property="Foreground" Value="{StaticResource CanvasBrush}" />
+      </Style>
+
+      <Style x:Key="TagButton" TargetType="Button" BasedOn="{StaticResource NorthButton}">
+        <Setter Property="Width" Value="27" />
+        <Setter Property="Height" Value="27" />
+        <Setter Property="Background" Value="{StaticResource CanvasBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource InkBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Ink80Brush}" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="Button">
+              <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5" Effect="{StaticResource RaisedShadow}">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Border>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Border" Property="Background" Value="{StaticResource ActionBrush}" /></Trigger>
+                <Trigger Property="IsPressed" Value="True"><Setter TargetName="Border" Property="Margin" Value="0,1,0,-1" /><Setter TargetName="Border" Property="Effect" Value="{StaticResource PressedShadow}" /></Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="NorthInput" TargetType="TextBox">
+        <Setter Property="Height" Value="54" />
+        <Setter Property="Padding" Value="14,0" />
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Foreground" Value="{StaticResource CanvasBrush}" />
+        <Setter Property="CaretBrush" Value="{StaticResource CanvasBrush}" />
+        <Setter Property="Background" Value="{StaticResource InkBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+      </Style>
+
+      <Style x:Key="NorthListBox" TargetType="ListBox">
+        <Setter Property="Background" Value="{StaticResource CanvasBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource MutedBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="ListBox">
+              <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}"><ItemsPresenter /></ScrollViewer>
+              </Border>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle">
+          <Setter.Value>
+            <Style TargetType="ListBoxItem">
+              <Setter Property="Padding" Value="0" />
+              <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+              <Setter Property="Template">
+                <Setter.Value>
+                  <ControlTemplate TargetType="ListBoxItem">
+                    <Border x:Name="Row" Background="Transparent" BorderBrush="{StaticResource MutedBrush}" BorderThickness="0,0,0,1">
+                      <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                      <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Row" Property="Background" Value="{StaticResource SurfaceBrush}" /></Trigger>
+                      <Trigger Property="IsSelected" Value="True"><Setter TargetName="Row" Property="Background" Value="{StaticResource SurfaceBrush}" /><Setter TargetName="Row" Property="BorderBrush" Value="{StaticResource ActionBrush}" /></Trigger>
+                    </ControlTemplate.Triggers>
+                  </ControlTemplate>
+                </Setter.Value>
+              </Setter>
+            </Style>
+          </Setter.Value>
+        </Setter>
+      </Style>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>
